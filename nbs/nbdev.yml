@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "manim_scirpts"
+  site-url: "https://HasanGoni.github.io/manim_scirpts"
+  description: "manim scripts will be created here"
+  repo-branch: main
+  repo-url: "https://github.com/HasanGoni/manim_scirpts"
