@@ -565,7 +565,7 @@ def feature_extraction_implementation(self:PaDiMStrictNoOverlap):
     self.play(FadeOut(challenge_connection), FadeOut(single_patch), FadeOut(patch_label),
                 FadeOut(cnn_arrow), FadeOut(cnn_text), FadeOut(feature1), FadeOut(label1),
                 FadeOut(feature2), FadeOut(label2), FadeOut(feature3), FadeOut(label3),
-                FadeOut(concat_arrow), FadeOut(concat_text), FadSolvingeOut(final_vector), FadeOut(final_label),
+                FadeOut(concat_arrow), FadeOut(concat_text), FadeOut(final_vector), FadeOut(final_label),
                 FadeOut(solution_note), FadeOut(solution1), FadeOut(solution2), FadeOut(solution3), run_time=1)
     #self.strict_clear()
         
