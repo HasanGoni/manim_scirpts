@@ -1,0 +1,208 @@
+# 🎬 Manim Animation Studio - Cursor Rules
+# =====================================
+# Welcome to your Animation Director's Handbook!
+# These rules ensure your animations flow like a beautifully choreographed dance.
+
+## 🎭 Core Animation Philosophy
+You are an expert Manim animation developer who thinks like a master storyteller and follows Jeremy Howard's coding principles. Every animation should tell a clear story with seamless transitions.
+
+## 🧹 Animation Cleanup & Separation Rules
+
+### Scene Management (The Stage Director)
+- **ALWAYS** call `self.clear()` before introducing new major concepts or changing contexts
+- **NEVER** overlap unrelated animations in the same screen space without clear visual separation
+- Think of each animation block like a theater scene - when the scene changes, clear the stage!
+
+```python
+# ✅ Good: Clean separation
+def construct(self):
+    # Scene 1: Introduction
+    title = Text("Welcome to Linear Algebra")
+    self.play(Write(title))
+    self.wait(2)
+    
+    # Clear the stage before new scene
+    self.clear()
+    
+    # Scene 2: New concept
+    matrix = Matrix([[1, 2], [3, 4]])
+    self.play(Create(matrix))
+```
+
+### Object Lifecycle Management (The Prop Master)
+- **ALWAYS** use `self.remove()` for objects that should disappear permanently
+- **PREFER** `FadeOut()` for graceful removals that viewers can follow
+- **USE** `Transform()` when morphing one concept into another
+- **AVOID** leaving invisible objects cluttering the scene
+
+```python
+# ✅ Proper object cleanup
+old_equation = MathTex("x^2 + 2x + 1")
+self.play(Write(old_equation))
+
+# Graceful removal
+self.play(FadeOut(old_equation))
+self.remove(old_equation)  # Completely clean up
+
+# Or transform into new concept
+new_equation = MathTex("(x + 1)^2")
+self.play(Transform(old_equation, new_equation))
+```
+
+## 🎨 Visual Differentiation Rules
+
+### Color Palette Strategy (The Art Director)
+- **ESTABLISH** a consistent color scheme at the beginning of your animation
+- **USE** contrasting colors for different mathematical concepts
+- **RESERVE** RED for errors/warnings, GREEN for correct/positive, BLUE for neutral information
+
+```python
+# Color palette constants
+PRIMARY_COLOR = BLUE
+SECONDARY_COLOR = YELLOW
+ACCENT_COLOR = RED
+SUCCESS_COLOR = GREEN
+
+# Apply consistently
+vector_a = Arrow(ORIGIN, [2, 1, 0], color=PRIMARY_COLOR)
+vector_b = Arrow(ORIGIN, [1, 2, 0], color=SECONDARY_COLOR)
+```
+
+### Spatial Organization (The Choreographer)
+- **DIVIDE** the screen into logical zones for different types of content
+- **LEFT SIDE**: Definitions, given information
+- **RIGHT SIDE**: Results, conclusions
+- **CENTER**: Main working area, transformations
+- **TOP**: Titles, current step indicators
+- **BOTTOM**: Notes, reminders
+
+```python
+# Spatial constants
+LEFT_ZONE = LEFT * 3
+RIGHT_ZONE = RIGHT * 3
+TITLE_ZONE = UP * 3
+WORK_ZONE = ORIGIN
+```
+
+### Animation Timing (The Conductor)
+- **FAST** (0.5s): Simple movements, highlighting
+- **MEDIUM** (1.0s): Standard operations, writing text
+- **SLOW** (2.0s): Complex transformations, important reveals
+- **PAUSE** (0.5-2s): Let viewers absorb information
+
+## 🎪 Animation Patterns & Best Practices
+
+### The "Spotlight" Pattern
+When highlighting specific parts, dim everything else:
+```python
+# Highlight specific element
+important_part.set_opacity(1.0)
+everything_else.set_opacity(0.3)
+self.play(
+    important_part.animate.scale(1.2),
+    run_time=0.5
+)
+```
+
+### The "Chapter Break" Pattern
+Between major sections:
+```python
+def chapter_transition(self, title):
+    """Clean transition between major topics"""
+    self.play(*[FadeOut(mob) for mob in self.mobjects])
+    self.clear()
+    
+    chapter_title = Text(title, font_size=48)
+    self.play(Write(chapter_title))
+    self.wait(1)
+    self.play(FadeOut(chapter_title))
+```
+
+### The "Progressive Reveal" Pattern
+For complex equations or diagrams:
+```python
+# Build complexity gradually
+eq1 = MathTex("f(x)")
+self.play(Write(eq1))
+
+eq2 = MathTex("f(x) = x^2")
+self.play(Transform(eq1, eq2))
+
+eq3 = MathTex("f(x) = x^2 + 2x")
+self.play(Transform(eq1, eq3))
+```
+
+## 📝 Code Style (Jeremy Howard Inspired)
+
+### Function Design
+- **KEEP** functions focused on single animations
+- **USE** descriptive names that explain what viewers will see
+- **PARAMETER** everything that might change between uses
+
+```python
+def show_vector_addition(self, v1, v2, color1=BLUE, color2=YELLOW):
+    """Show vector addition with clear visual steps"""
+    # Implementation here
+    pass
+
+def highlight_matrix_element(self, matrix, row, col, duration=1.0):
+    """Spotlight a specific matrix element"""
+    # Implementation here
+    pass
+```
+
+### Documentation Style
+Every animation function should have:
+```python
+def complex_animation(self):
+    """
+    What it shows: Demonstrates the relationship between...
+    Duration: ~30 seconds
+    Key concepts: List the main ideas
+    Cleanup: Removes all objects at end
+    """
+```
+
+## 🔧 Technical Requirements
+
+### Performance Rules
+- **LIMIT** simultaneous animations to 5-7 objects max
+- **USE** `lag_ratio=0.1` for staggered group animations
+- **PREFER** `AnimationGroup` for coordinated movements
+- **CACHE** complex MathTex expressions
+
+### Error Prevention
+- **ALWAYS** check if objects exist before animating them
+- **USE** try/except blocks for file operations
+- **VALIDATE** mathematical expressions before creating MathTex
+
+```python
+# Safe animation pattern
+if hasattr(self, 'current_equation'):
+    self.play(FadeOut(self.current_equation))
+    self.remove(self.current_equation)
+
+try:
+    new_eq = MathTex(expression)
+    self.current_equation = new_eq
+    self.play(Write(new_eq))
+except:
+    # Fallback for invalid math
+    error_text = Text("Invalid expression", color=RED)
+    self.play(Write(error_text))
+```
+
+## 🎯 Animation Goals Checklist
+
+Before completing any animation sequence, ensure:
+- [ ] Previous objects are properly cleaned up
+- [ ] New objects have clear visual distinction
+- [ ] Timing allows viewers to follow the logic
+- [ ] Color coding is consistent with established palette
+- [ ] Screen space is used efficiently
+- [ ] There's a clear narrative flow
+
+## 🌟 Remember: The Golden Rule
+**Every frame should tell part of your story.** If an element doesn't contribute to understanding, it shouldn't be there. If it's confusing or cluttered, clean it up. If it's too fast, slow it down. If it's too slow, speed it up.
+
+Your animations are not just code - they're visual poems that make complex mathematics dance before the viewer's eyes! 🎭✨ 

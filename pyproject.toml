@@ -1,3 +1,14 @@
-[build-system]
-requires = ["setuptools>=64.0"]
-build-backend = "setuptools.build_meta"
+[project]
+name="manim_scirpts"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python=">=3.9"
+dependencies = [
+    "fastcore>=1.8.5",
+    "manim>=0.19.0",
+    "manimpango>=0.6.0",
+    "nbdev>=2.4.4",
+    "numpy>=2.3.1",
+    "pandas>=2.3.1",
+]
