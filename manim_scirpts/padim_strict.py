@@ -57,7 +57,7 @@ class PaDiMStrictNoOverlap(Scene):
         self.mahalanobis_implementation()
         self.complete_pipeline()
         self.inference_demo()
-        elf.show_anomaly_detection()
+        self.show_anomaly_detection()
         self.finale()
 
 	
